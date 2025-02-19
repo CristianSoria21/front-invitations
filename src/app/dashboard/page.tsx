@@ -1,9 +1,8 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import Navbar from '../components/navbar';
-//import Sidebar from '../components/sidebar';
+import Sidebar from '../components/sidebar';
 import TemplateCard from '../components/templates/TemplateCard';
 
 export default function Dashboard() {
@@ -61,8 +60,8 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Box display="flex" sx={{ position: 'relative', zIndex: 0 }}>
-      {/* <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> */}
+    <Box display="flex" sx={{ position: 'relative', zIndex: 0, marginTop: 5 }}>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Contenido principal */}
       <Box
