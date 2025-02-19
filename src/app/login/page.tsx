@@ -1,7 +1,14 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { TextField, Button, Typography, Container, Box, Link } from "@mui/material";
-import { useEffect, useState } from "react";
+'use client';
+import { useRouter } from 'next/navigation';
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Box,
+  Link,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -16,15 +23,31 @@ export default function LoginForm() {
     event.preventDefault();
 
     setTimeout(() => {
-      router.push("#");
+      router.push('/dashboard');
     }, 100);
   };
 
   if (!isClient) return null; // Evita renderizar en el servidor. Se atiende problema expuesto al correr el servidor
 
   return (
-    <Container maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 20 }}>
-      <Box sx={{ width: "100%", p: 4, bgcolor: "background.paper", borderRadius: 2, boxShadow: 3 }}>
+    <Container
+      maxWidth="xs"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mt: 20,
+      }}
+    >
+      <Box
+        sx={{
+          width: '100%',
+          p: 4,
+          bgcolor: 'background.paper',
+          borderRadius: 2,
+          boxShadow: 3,
+        }}
+      >
         <Typography variant="h5" component="h2" align="center" gutterBottom>
           Iniciar Sesión
         </Typography>
@@ -50,30 +73,38 @@ export default function LoginForm() {
             required
           />
 
-          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <Button
               variant="contained"
               color="primary"
               fullWidth
               type="submit"
-              sx={{ textTransform: "none", fontWeight: "bold" }}
+              sx={{ textTransform: 'none', fontWeight: 'bold' }}
             >
               Iniciar Sesión
             </Button>
           </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             {/* Enlace para recuperación de contraseña */}
-            <Link href="#" variant="body2" sx={{ fontWeight: "bold", color: "primary.main" }}>
+            <Link
+              href="#"
+              variant="body2"
+              sx={{ fontWeight: 'bold', color: 'primary.main' }}
+            >
               ¿Olvidaste tu contraseña?
             </Link>
           </Box>
         </form>
 
-        <Box sx={{ textAlign: "center", mt: 3 }}>
+        <Box sx={{ textAlign: 'center', mt: 3 }}>
           <Typography variant="body2" color="text.secondary">
-            ¿No tienes una cuenta?{" "}
-            <Link href="/register" variant="body2" sx={{ fontWeight: "bold", color: "primary.main" }}>
+            ¿No tienes una cuenta?{' '}
+            <Link
+              href="/register"
+              variant="body2"
+              sx={{ fontWeight: 'bold', color: 'primary.main' }}
+            >
               Regístrate
             </Link>
           </Typography>
