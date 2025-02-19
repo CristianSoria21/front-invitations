@@ -73,7 +73,7 @@ export default function LoginForm() {
         <Box sx={{ textAlign: "center", mt: 3 }}>
           <Typography variant="body2" color="text.secondary">
             ¿No tienes una cuenta?{" "}
-            <Link href="#" variant="body2" sx={{ fontWeight: "bold", color: "primary.main" }}>
+            <Link href="/register" variant="body2" sx={{ fontWeight: "bold", color: "primary.main" }}>
               Regístrate
             </Link>
           </Typography>
