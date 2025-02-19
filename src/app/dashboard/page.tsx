@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
-//import Navbar from '../components/navbar';
+import Navbar from '../components/navbar';
 //import Sidebar from '../components/sidebar';
 import TemplateCard from '../components/templates/TemplateCard';
 
@@ -62,7 +62,6 @@ export default function Dashboard() {
 
   return (
     <Box display="flex" sx={{ position: 'relative', zIndex: 0 }}>
-      {/* Sidebar */}
       {/* <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> */}
 
       {/* Contenido principal */}
@@ -72,14 +71,12 @@ export default function Dashboard() {
           flexGrow: 1,
         }}
       >
-        {/* <Navbar /> */}
+        <Navbar />
         <Container sx={{ paddingTop: '64px', paddingBottom: '32px' }}>
-          {/* Título del catálogo */}
           <Typography variant="h4" component="h2" gutterBottom>
             Catálogo de Plantillas
           </Typography>
 
-          {/* Grid de plantillas */}
           <Box
             sx={{
               display: 'flex',
