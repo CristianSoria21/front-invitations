@@ -2,7 +2,7 @@
 import { Person as UserIcon } from '@mui/icons-material';
 import { AppBar, Toolbar, Menu, MenuItem } from '@mui/material';
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/Button';
 import Fade from '@mui/material/Fade';
 import { useRouter } from 'next/navigation';
 
@@ -36,20 +36,21 @@ export default function Navbar() {
     >
       <Toolbar sx={{ justifyContent: 'flex-end' }}>
         <div>
-          <Button
+          <IconButton
             id="fade-button"
             aria-controls={open ? 'fade-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             sx={{
-              height: '50px',
+              height: '60px',
               borderRadius: '50%',
-              '&:focus': { outline: 'none' },
+              '&:hover': { backgroundColor: '#0A1929', color: 'white' },
+              '&:focus': { outline: '#0A1929' },
             }}
           >
             <UserIcon />
-          </Button>
+          </IconButton>
           <Menu
             id="fade-menu"
             MenuListProps={{
