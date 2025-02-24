@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
@@ -7,7 +7,6 @@ import TemplateCard from '../components/templates/TemplateCard';
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Estado de carga
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -53,12 +52,6 @@ export default function Dashboard() {
     },
   ];
 
-  // Simula la carga de datos
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000); // 5 segundos de carga
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <Box display="flex" sx={{ position: 'relative', zIndex: 0, marginTop: 5 }}>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
@@ -96,8 +89,6 @@ export default function Dashboard() {
                   title={template.title}
                   description={template.description}
                   imageUrl={template.imageUrl}
-                  index={index}
-                  isLoading={isLoading}
                 />
               </Box>
             ))}
