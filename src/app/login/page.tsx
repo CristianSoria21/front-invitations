@@ -1,33 +1,35 @@
 'use client';
+
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  TextField,
-  Button,
-  Typography,
-  Container,
-  Box,
-  Link,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
+import { TextField, Button, Typography, Container, Box, Link, Alert } from '@mui/material';
+import authService from '@/services/authService';
 
 export default function LoginForm() {
   const router = useRouter();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    setTimeout(() => {
-      router.push('/dashboard');
-    }, 100);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (!isClient) return null; // Evita renderizar en el servidor. Se atiende problema expuesto al correr el servidor
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setErrorMessage('');
+    setLoading(true);
+
+    const success = await authService.login(credentials);
+    setLoading(false);
+
+    if (success) {
+      router.push('/dashboard'); // ✅ Redirigir tras login exitoso
+    } else {
+      setErrorMessage('Credenciales incorrectas. Intenta nuevamente.');
+    }
+  };
 
   return (
     <Container
@@ -52,15 +54,24 @@ export default function LoginForm() {
           Iniciar Sesión
         </Typography>
 
+        {errorMessage && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
+
         <form onSubmit={handleLogin}>
           <TextField
             fullWidth
             id="email"
             label="Correo Electrónico"
             type="email"
+            name="email"
             variant="outlined"
             margin="normal"
             required
+            value={credentials.email}
+            onChange={handleChange}
           />
 
           <TextField
@@ -70,7 +81,10 @@ export default function LoginForm() {
             type="password"
             variant="outlined"
             margin="normal"
+            name="password"
             required
+            value={credentials.password}
+            onChange={handleChange}
           />
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
@@ -79,19 +93,15 @@ export default function LoginForm() {
               color="primary"
               fullWidth
               type="submit"
+              disabled={loading}
               sx={{ textTransform: 'none', fontWeight: 'bold' }}
             >
-              Iniciar Sesión
+              {loading ? 'Iniciando...' : 'Iniciar Sesión'}
             </Button>
           </Box>
 
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            {/* Enlace para recuperación de contraseña */}
-            <Link
-              href="#"
-              variant="body2"
-              sx={{ fontWeight: 'bold', color: 'primary.main' }}
-            >
+            <Link href="#" variant="body2" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
               ¿Olvidaste tu contraseña?
             </Link>
           </Box>
