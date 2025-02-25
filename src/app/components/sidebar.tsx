@@ -1,6 +1,17 @@
 'use client';
-import { motion } from 'framer-motion';
-import { Menu, Home, FileText, Settings } from 'lucide-react';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import HomeIcon from '@mui/icons-material/Home';
+import DescriptionIcon from '@mui/icons-material/Description';
+import SettingsIcon from '@mui/icons-material/Settings';
+import MenuIcon from '@mui/icons-material/Menu';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,47 +20,55 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
   return (
-    <>
-      {/* Botón de abrir/cerrar el Sidebar, fuera del contenedor del sidebar */}
-      <button
+    <Box>
+      {/* Botón para abrir/cerrasr el Sidebar */}
+      <IconButton
         onClick={toggleSidebar}
-        className="fixed top-3 left-5 z-50 bg-blue-600 text-white p-2 rounded-md shadow-lg"
+        sx={{
+          position: 'fixed',
+          top: 12,
+          left: 16,
+          zIndex: 1300,
+          backgroundColor: 'primary.dark',
+          color: 'white',
+          '&:hover': { backgroundColor: '#0A1929' },
+        }}
       >
-        <Menu size={24} />
-      </button>
+        <MenuIcon />
+      </IconButton>
 
-      {/* Capa oscura cuando el Sidebar está abierto */}
-      {isOpen && (
-        <div
-          onClick={toggleSidebar} // Opción de cerrar el sidebar cuando se hace clic en el fondo oscuro
-          className="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-40"
-        />
-      )}
-
-      {/* Sidebar que se despliega */}
-      <motion.div
-        initial={{ x: -250 }}
-        animate={{ x: isOpen ? 0 : -250 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed top-0 left-0 h-full w-60 bg-gray-900 text-white shadow-lg z-50 flex flex-col py-6 px-4"
-      >
-        <h2 className="text-xl font-bold text-center mb-4">Dashboard</h2>
-
-        <nav className="flex flex-col gap-6">
-          <SidebarItem icon={<Home size={20} />} text="Inicio" />
-          <SidebarItem icon={<FileText size={20} />} text="Eventos" />
-          <SidebarItem icon={<Settings size={20} />} text="Configuración" />
-        </nav>
-      </motion.div>
-    </>
+      {/* Sidebar Drawer */}
+      <Drawer anchor="left" open={isOpen} onClose={toggleSidebar}>
+        <Box
+          sx={{
+            width: 240,
+            bgcolor: '#0A1929',
+            height: '100vh',
+            p: 2,
+            color: 'white',
+          }}
+        >
+          <Typography variant="h6" sx={{ textAlign: 'center', mb: 2 }}>
+            Dashboard
+          </Typography>
+          <List>
+            <SidebarItem icon={<HomeIcon />} text="Inicio" />
+            <SidebarItem icon={<DescriptionIcon />} text="Eventos" />
+            <SidebarItem icon={<SettingsIcon />} text="Configuración" />
+          </List>
+        </Box>
+      </Drawer>
+    </Box>
   );
 }
 
 function SidebarItem({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-md cursor-pointer hover:bg-blue-500 transition">
-      {icon}
-      <span>{text}</span>
-    </div>
+    <ListItem disablePadding>
+      <ListItemButton>
+        <ListItemIcon sx={{ color: 'white' }}>{icon}</ListItemIcon>
+        <ListItemText primary={text} sx={{ color: 'white' }} />
+      </ListItemButton>
+    </ListItem>
   );
 }
