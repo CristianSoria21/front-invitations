@@ -19,15 +19,11 @@ export default function LoginForm() {
     setIsClient(true);
   }, []);
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    setTimeout(() => {
-      router.push('/dashboard');
-    }, 100);
+  const handleLogin = () => {
+    router.push('/dashboard');
   };
 
-  if (!isClient) return null; // Evita renderizar en el servidor. Se atiende problema expuesto al correr el servidor
+  if (!isClient) return null;
 
   return (
     <Container
@@ -52,50 +48,47 @@ export default function LoginForm() {
           Iniciar Sesión
         </Typography>
 
-        <form onSubmit={handleLogin}>
-          <TextField
+        <TextField
+          fullWidth
+          id="email"
+          label="Correo Electrónico"
+          type="email"
+          variant="outlined"
+          margin="normal"
+          required
+        />
+
+        <TextField
+          fullWidth
+          id="password"
+          label="Contraseña"
+          type="password"
+          variant="outlined"
+          margin="normal"
+          required
+        />
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+          <Button
+            variant="contained"
+            color="primary"
             fullWidth
-            id="email"
-            label="Correo Electrónico"
-            type="email"
-            variant="outlined"
-            margin="normal"
-            required
-          />
+            onClick={handleLogin}
+            sx={{ textTransform: 'none', fontWeight: 'bold' }}
+          >
+            Iniciar Sesión
+          </Button>
+        </Box>
 
-          <TextField
-            fullWidth
-            id="password"
-            label="Contraseña"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            required
-          />
-
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              type="submit"
-              sx={{ textTransform: 'none', fontWeight: 'bold' }}
-            >
-              Iniciar Sesión
-            </Button>
-          </Box>
-
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            {/* Enlace para recuperación de contraseña */}
-            <Link
-              href="#"
-              variant="body2"
-              sx={{ fontWeight: 'bold', color: 'primary.main' }}
-            >
-              ¿Olvidaste tu contraseña?
-            </Link>
-          </Box>
-        </form>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Link
+            href="#"
+            variant="body2"
+            sx={{ fontWeight: 'bold', color: 'primary.main' }}
+          >
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </Box>
 
         <Box sx={{ textAlign: 'center', mt: 3 }}>
           <Typography variant="body2" color="text.secondary">

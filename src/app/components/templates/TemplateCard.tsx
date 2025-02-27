@@ -1,5 +1,4 @@
 'use client';
-
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 
 interface TemplateCardProps {

@@ -1,17 +1,21 @@
 'use client';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import HomeIcon from '@mui/icons-material/Home';
-import DescriptionIcon from '@mui/icons-material/Description';
-import SettingsIcon from '@mui/icons-material/Settings';
-import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Box,
+  Typography,
+} from '@mui/material';
+import {
+  Home as HomeIcon,
+  Description as DescriptionIcon,
+  Settings as SettingsIcon,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
 
 interface SidebarProps {
   isOpen: boolean;
