@@ -1,10 +1,15 @@
 'use client';
-import { Person as UserIcon } from '@mui/icons-material';
-import { AppBar, Toolbar, Menu, MenuItem } from '@mui/material';
 import * as React from 'react';
-import IconButton from '@mui/material/Button';
-import Fade from '@mui/material/Fade';
 import { useRouter } from 'next/navigation';
+import { Person as UserIcon } from '@mui/icons-material';
+import {
+  AppBar,
+  Toolbar,
+  Menu,
+  MenuItem,
+  IconButton,
+  Fade,
+} from '@mui/material';
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -44,6 +49,7 @@ export default function Navbar() {
             onClick={handleClick}
             sx={{
               height: '60px',
+              width: '60px',
               borderRadius: '50%',
               '&:hover': { backgroundColor: '#0A1929', color: 'white' },
               '&:focus': { outline: '#0A1929' },

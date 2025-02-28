@@ -1,5 +1,5 @@
-'use client'; // Necesario en Next.js 13+ para usar hooks como useState y useRouter
-import { useState } from 'react';
+'use client';
+
 import { useRouter } from 'next/navigation';
 import {
   TextField,
@@ -10,20 +10,12 @@ import {
   Box,
   Link,
 } from '@mui/material';
-import SuccessModal from '../components/modals/success-modal';
 
 export default function RegisterForm() {
-  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setShowModal(true);
-
-    setTimeout(() => {
-      setShowModal(false);
-      router.push('/login');
-    }, 3000);
+  const handleRegister = () => {
+    router.push('/dashboard');
   };
 
   return (
@@ -33,10 +25,7 @@ export default function RegisterForm() {
           Registro
         </Typography>
 
-        <form
-          onSubmit={handleRegister}
-          style={{ position: 'relative', zIndex: 0 }}
-        >
+        <Box>
           <TextField
             fullWidth
             id="fullName"
@@ -80,13 +69,13 @@ export default function RegisterForm() {
             <Button
               variant="contained"
               color="success"
-              type="submit"
+              onClick={handleRegister}
               sx={{ textTransform: 'none', fontWeight: 'bold', width: '100%' }}
             >
               Registrarse
             </Button>
           </Box>
-        </form>
+        </Box>
 
         <Box sx={{ textAlign: 'center', mt: 3 }}>
           <Typography variant="body1">¿Ya tienes una cuenta?</Typography>
@@ -99,9 +88,6 @@ export default function RegisterForm() {
           </Link>
         </Box>
       </Paper>
-
-      {/* Modal de éxito */}
-      {showModal && <SuccessModal />}
     </Container>
   );
 }
