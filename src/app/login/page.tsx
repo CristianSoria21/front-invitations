@@ -16,8 +16,8 @@ export default function LoginForm() {
     setCredentials((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setErrorMessage('');
     setLoading(true);
 
@@ -53,12 +53,6 @@ export default function LoginForm() {
         <Typography variant="h5" component="h2" align="center" gutterBottom>
           Iniciar Sesión
         </Typography>
-
-        {errorMessage && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {errorMessage}
-          </Alert>
-        )}
 
         <form onSubmit={handleLogin}>
           <TextField
@@ -109,7 +103,7 @@ export default function LoginForm() {
 
         <Box sx={{ textAlign: 'center', mt: 3 }}>
           <Typography variant="body2" color="text.secondary">
-            ¿No tienes una cuenta?{' '}
+            ¿No tienes una cuenta?
             <Link
               href="/register"
               variant="body2"
@@ -120,6 +114,12 @@ export default function LoginForm() {
           </Typography>
         </Box>
       </Box>
+
+      {errorMessage && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}
     </Container>
   );
 }

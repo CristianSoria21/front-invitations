@@ -2,14 +2,8 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { Person as UserIcon } from '@mui/icons-material';
-import {
-  AppBar,
-  Toolbar,
-  Menu,
-  MenuItem,
-  IconButton,
-  Fade,
-} from '@mui/material';
+import { AppBar, Toolbar, Menu, MenuItem, IconButton, Fade } from '@mui/material';
+import authService from '@/services/authService';
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -24,9 +18,13 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    handleClose();
-    router.push('/login'); // Redirigir al login
+  const handleLogout = async () => {
+    const succes = await authService.logout();
+
+    if (succes) {
+      handleClose();
+      router.push('/login'); // Redirigir al login
+    } else console.log('error al hacer login');
   };
 
   return (
