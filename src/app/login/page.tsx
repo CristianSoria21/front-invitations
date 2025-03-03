@@ -27,7 +27,6 @@ export default function LoginForm() {
     if (success) {
       router.push('/dashboard'); // ✅ Redirigir tras login exitoso
     } else {
-      setErrorMessage('Credenciales incorrectas. Intenta nuevamente.');
     }
   };
 
